@@ -1,0 +1,113 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="Alunos.ManutencaoGrupos"
+        Title="Manutenção de Grupos"
+        WindowState="Maximized"
+        ResizeMode="NoResize"
+        Background="#F4F6F9" av:DesignHeight="602.847" av:DesignWidth="937.206">
+
+    <Window.Resources>
+        <!-- Botão moderno -->
+        <Style x:Key="ModernButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="Background" Value="#143d67"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="8">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="80">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Cabeçalho -->
+        <TextBlock Text="Manutenção dos Grupos"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   Foreground="#143d67"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,30"/>
+
+        <!-- DataGrid -->
+        <Border Grid.Row="1" Background="White" CornerRadius="12" Padding="20"
+                >
+            <DataGrid x:Name="dataGridGrupos"
+                      ItemsSource="{Binding Grupos}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      RowHeight="36"
+                      FontSize="14"
+                      GridLinesVisibility="None"
+                      BorderThickness="0"
+                      AlternatingRowBackground="#F0F2F5"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="200"/>
+                    <DataGridTemplateColumn Header="Elementos" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding ElementosNomes}"
+                                          IsReadOnly="True"
+                                          IsEditable="False"
+                                          Width="300"
+                                          HorizontalAlignment="Left"
+                                          />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Editar" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Editar"
+                                        Width="70"
+                                        Height="28"
+                                        FontWeight="SemiBold"
+                                        Cursor="Hand"
+                                        Background="#143d67"
+                                        Foreground="White"
+                                        Click="BtnEditarGrupo_Click"
+                                        BorderThickness="0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- Botões inferiores -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,30,0,0">
+            <Button x:Name="btnGrupo1"
+                    Content="Voltar"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Click="btnGrupo1_Click"/>
+
+            <Button x:Name="btnGrupo3"
+                    Content="Criar Grupo"
+                    Style="{StaticResource ModernButtonStyle}"
+                    Click="btnGrupo3_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

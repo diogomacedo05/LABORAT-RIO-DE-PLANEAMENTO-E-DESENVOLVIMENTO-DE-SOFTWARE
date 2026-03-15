@@ -1,0 +1,11 @@
+﻿<Window x:Class="Alunos.Ovo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ovo" Height="450" Width="800">
+    <Grid>
+        <MediaElement x:Name="mediaElement"
+                      LoadedBehavior="Manual"
+                      UnloadedBehavior="Stop"
+                      Stretch="Uniform" />
+    </Grid>
+</Window>

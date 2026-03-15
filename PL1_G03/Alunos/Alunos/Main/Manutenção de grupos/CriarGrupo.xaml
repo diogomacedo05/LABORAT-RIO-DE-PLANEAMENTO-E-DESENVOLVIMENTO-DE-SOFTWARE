@@ -1,0 +1,115 @@
+﻿<Window x:Class="Alunos.CriarGrupo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Criar Grupo"
+        ResizeMode="NoResize"
+        WindowState="Normal"
+        Height="440" Width="600"
+        Background="#F4F6F9"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Margin" Value="6,0"/>
+            <Setter Property="Background" Value="#143d67"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="110"/>
+            <Setter Property="Height" Value="34"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Border Background="White" CornerRadius="10" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Nome Grupo -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Filtros -->
+                    <RowDefinition Height="*"/>
+                    <!-- DataGrid -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Botões -->
+                </Grid.RowDefinitions>
+
+                <!-- Nome do novo grupo -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                    <Label Content="Nome do novo grupo:" VerticalAlignment="Center" Width="160"/>
+                    <TextBox x:Name="tbNomeGrupo" Width="250" Height="28" 
+                             VerticalAlignment="Center" 
+                             TextChanged="tbNomeGrupo_TextChanged"/>
+                </StackPanel>
+
+                <!-- Filtros por nome e número -->
+                <Grid Grid.Row="1" Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Campo Nome -->
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <Label Content="Nome:" Width="50" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbNome" Width="130" Height="24" 
+                                 VerticalAlignment="Center" 
+                                 TextChanged="tbNumero_TextChanged"/>
+                    </StackPanel>
+
+                    <!-- Espaçamento central vazio -->
+                    <Grid Grid.Column="1"/>
+
+                    <!-- Campo Número -->
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                        <Label Content="Número:" Width="60" VerticalAlignment="Center"/>
+                        <TextBox x:Name="tbNumero" Width="90" Height="24" 
+                                 VerticalAlignment="Center"
+                                 TextChanged="tbNumero_TextChanged"/>
+                    </StackPanel>
+                </Grid>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="dataGridAlunos" Grid.Row="2"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          HeadersVisibility="Column"
+                          SelectionMode="Extended"
+                          Margin="0,0,0,20"
+                          Height="190"
+                          AlternatingRowBackground="#F0F2F5"
+                          FontSize="13">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Número" Binding="{Binding Numero}" Width="70" IsReadOnly="True"/>
+                        <DataGridCheckBoxColumn Header="Selecionar" Binding="{Binding IsSelected, Mode=TwoWay}" Width="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- Botões -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnCancelar"
+                            Content="Voltar"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="btnCancelar_Click"/>
+                    <Button x:Name="btnGuardar"
+                            Content="Guardar"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Click="btnGuardar_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

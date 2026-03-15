@@ -1,0 +1,95 @@
+﻿<Window x:Class="Alunos.AtribuirNotas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Atribuir Notas"
+        WindowState="Maximized"
+        Background="#F7F9FB" Height="486" Width="726">
+    <Grid Margin="40">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Atribuir Notas" FontSize="32" FontWeight="Bold" Foreground="#2D3E50" Margin="0,0,0,18" Grid.Row="0"/>
+
+        <!-- Linha Tarefa -->
+        <Grid Margin="0,0,0,12" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Tarefa:" FontWeight="SemiBold" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0"/>
+            <ComboBox x:Name="cbTarefas" Grid.Column="1" Width="320"
+                      SelectionChanged="cbTarefas_SelectionChanged"
+                      DisplayMemberPath="Titulo"
+                      Padding="6"
+                      Background="White"
+                      BorderBrush="#B0BEC5"
+                      BorderThickness="1"/>
+        </Grid>
+
+        <!-- Linha Grupo -->
+        <Grid Margin="0,0,0,12" Grid.Row="2" Visibility="{Binding ElementName=cbGrupos, Path=Visibility}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Grupo:" FontWeight="SemiBold" VerticalAlignment="Center" Grid.Column="0" Margin="0,0,10,0"/>
+            <ComboBox x:Name="cbGrupos" Grid.Column="1" Width="320"
+                      DisplayMemberPath="Nome"
+                      Visibility="Collapsed"
+                      SelectionChanged="cbGrupos_SelectionChanged"
+                      Padding="6"
+                      Background="White"
+                      BorderBrush="#B0BEC5"
+                      BorderThickness="1"/>
+        </Grid>
+
+        <!-- Mostra o ID do grupo selecionado -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Grid.Row="3" Visibility="{Binding ElementName=cbGrupos, Path=Visibility}">
+            <TextBlock Text="ID do Grupo: " FontWeight="SemiBold"/>
+            <TextBlock x:Name="txtGrupoId" FontWeight="Bold" Foreground="#1976D2"/>
+        </StackPanel>
+
+        <!-- Input para atribuir nota igual a todos -->
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,8" Grid.Row="4" Visibility="{Binding ElementName=cbGrupos, Path=Visibility}">
+            <TextBlock Text="Nota para todos: " VerticalAlignment="Center"/>
+            <TextBox x:Name="txtNotaGrupo" Width="60" Margin="5,0,5,0"/>
+            <Button Content="Atribuir a todos" Click="btnAtribuirNotaGrupo_Click"
+                    Style="{StaticResource RoundedButtonStyle}" Padding="6,2"/>
+        </StackPanel>
+
+        <TextBlock Text="Alunos" FontWeight="SemiBold" Margin="0,0,0,6" Grid.Row="5" VerticalAlignment="Top"/>
+
+        <Border Grid.Row="5" Background="White" CornerRadius="8" BorderBrush="#B0BEC5" BorderThickness="1" Padding="8" Margin="0,36,0,10">
+            <DataGrid x:Name="dgAlunos"
+                      AutoGenerateColumns="False"
+                      HeadersVisibility="Column"
+                      CanUserAddRows="False"
+                      CanUserDeleteRows="False"
+                      IsReadOnly="False"
+                      Background="Transparent"
+                      BorderThickness="0"
+                      MouseDoubleClick="dgAlunos_MouseDoubleClick"
+                      FontSize="18"
+                      RowHeight="38">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Nota" Binding="{Binding Nota, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0" HorizontalAlignment="Right" Grid.Row="6">
+            <Button Content="Guardar Notas" Width="181" Margin="0,0,10,0" Click="btnAtribuirNota_Click"
+                    Style="{StaticResource RoundedButtonStyle}" Padding="12,6" Height="25"/>
+            <Button Content="Voltar" Width="110" Click="btnVoltar_Click"
+                    Style="{StaticResource RoundedButtonStyle}" Padding="12,6"/>
+        </StackPanel>
+    </Grid>
+</Window>

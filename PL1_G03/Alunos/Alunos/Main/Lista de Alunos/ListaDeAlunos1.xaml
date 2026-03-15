@@ -1,0 +1,142 @@
+﻿<Window x:Class="Alunos.ListaDeAlunos1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:Alunos"
+        ResizeMode="CanResize"
+        WindowState="Maximized"
+        Title="ListaDeAlunos1" Height="423" Width="679">
+    <Grid>
+        <!-- Título -->
+        <Label Content="Lista de Alunos" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"
+               FontSize="24" FontWeight="Bold"/>
+
+        <!-- DataGrid com visual moderno -->
+        <Border Background="White" CornerRadius="12" Padding="20" Margin="30,70,30,120">
+            <DataGrid x:Name="dataGridAlunos"
+                      ItemsSource="{Binding Alunos}"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      IsReadOnly="True"
+                      SelectionMode="Extended"
+                      HeadersVisibility="Column"
+                      RowHeight="36"
+                      FontSize="14"
+                      GridLinesVisibility="None"
+                      BorderThickness="0"
+                      AlternatingRowBackground="#F0F2F5"
+                      Background="White">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="40">
+                        <DataGridTemplateColumn.Header>
+                            <CheckBox x:Name="chkSelectAll" Click="chkSelectAll_Click"/>
+                        </DataGridTemplateColumn.Header>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Nome" Binding="{Binding Nome}" Width="*"/>
+                    <DataGridTextColumn Header="Número" Binding="{Binding Numero}" Width="*"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <!-- StackPanel de botões centralizado em baixo -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30">
+            <!-- ... os teus botões exatamente como já tens ... -->
+            <Button x:Name="btnCarregarLista" Content="Carregar Lista"
+                    Width="146" Height="45"
+                    Background="#143d67" Foreground="White" FontSize="14" FontWeight="SemiBold" Cursor="Hand"
+                    Click="btnCarregarLista_Click" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="20" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!-- ... restantes botões ... -->
+            <Button x:Name="btnAdicionar" Content="Adicionar Aluno"
+                    Width="140" Height="45"
+                    Background="#143d67" Foreground="White" FontSize="14" FontWeight="SemiBold" Cursor="Hand"
+                    Click="btnAdicionarAluno_Click" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="20" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="btnEditar" Content="Editar"
+                    Width="138" Height="45"
+                    Background="#143d67" Foreground="White" FontSize="14" FontWeight="SemiBold" Cursor="Hand"
+                    Click="btnEditarAluno_Click" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="20" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="btnEliminar" Content="Eliminar"
+                    Width="138" Height="45"
+                    Background="#b91c1c" Foreground="White" FontSize="14" FontWeight="SemiBold" Cursor="Hand"
+                    Click="btnRemoverAluno_Click" Margin="0,0,10,0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="20" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="btnVoltar" Content="Voltar e Guardar"
+                    Width="121" Height="45"
+                    Background="#143d67" Foreground="White" FontSize="14" FontWeight="SemiBold" Cursor="Hand"
+                    Click="btnVoltar_Click" Margin="0">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="20" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
