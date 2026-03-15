@@ -33,6 +33,7 @@ Architecture: Model-View-ViewModel (MVVM) pattern to ensure clean separation of 
 Design: Specification followed UML Use Case and Class diagrams.
 
 👥 Authors (Group G03)
+
 Diogo Macedo (al80981)
 
 Américo Sousa (al80901)
